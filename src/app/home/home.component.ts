@@ -10,27 +10,18 @@ import { Oferta } from '../shared/ofertas.model'
 })
 export class HomeComponent implements OnInit {
   
-  public ofertas!: any
+  public oferta!: Oferta[]
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
-    this.getter();
-  }
-
-  getter() {
     this.ofertasService.getOfertas()
-    .subscribe((data: Oferta) => {
-      this.ofertas = data
-      console.log('A variavel que preenchemos', this.ofertas)
-      console.log('O data que recebemos ', data)
+    .subscribe((ofertas: Oferta[]) => {
+      this.oferta = ofertas
     })
+    
   }
+  
 
-  getterPorCategoria(categoria: string) {
-    this.ofertasService.getOfertasPorCategoria(categoria)
-    .subscribe((data: Oferta) => {
-      this.ofertas = data
-    })
-  }
+  
 
 }

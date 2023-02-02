@@ -17,6 +17,8 @@ export class DiversaoComponent implements OnInit {
 
   ngOnInit() {
     this.ofertasService.getOfertasPorCategoria('diversao')
+    .subscribe((ofertas: Oferta[]) => { this.ofertas = ofertas})
+    
       
   }
 
