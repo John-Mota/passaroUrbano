@@ -27,7 +27,12 @@ export class OfertaComponent implements OnInit {
     .subscribe((oferta: Oferta[]) =>  {
       this.oferta = oferta
     })
-    
+  
+   // this.route.params.subscribe(
+   //   (parametro: any) => {console.log(parametro)},
+   //   (erro: any) => console.log(erro),
+   //   () => console.log('concluído')
+   // )
   }
   
   
