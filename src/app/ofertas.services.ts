@@ -12,6 +12,7 @@ export class OfertasService {
 
     private apiURL = 'http://localhost:3000'
     public ofertas!: Oferta
+  
     constructor(private http: HttpClient) {
         
      }
@@ -37,5 +38,39 @@ export class OfertasService {
     public getOndeFicaOfertaPorId(id: number): Observable<any>{
         return this.http.get(`${this.apiURL}/onde-fica?id=${id}`)  
     }
+
+    public observableOferta(): Observable<any> {
+        return new Observable<string>(observador => {
+          observador.next('1')
+          observador.next('2')
+          observador.next('3')
+          observador.next('4')
+          observador.complete()
+          observador.next('fim')
+          
+        })
+    }
+
+    
+    
+
+       
+
+      /*
+      
+    this.ofertaService.observable.subscribe()
+
+    public observable(): Observable<any>{
+        return new Observable<any>(onse => {
+            onse.next(
+                setTimeout(() => {
+                    
+                }, 2000)
+            )
+        })
+    }
+
+    
+      */
 
 }
