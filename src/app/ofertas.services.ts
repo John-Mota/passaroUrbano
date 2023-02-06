@@ -5,6 +5,7 @@ import { Oferta } from './shared/ofertas.model'
 import { Observable } from 'rxjs';
 
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -39,17 +40,13 @@ export class OfertasService {
         return this.http.get(`${this.apiURL}/onde-fica?id=${id}`)  
     }
 
-    public observableOferta(): Observable<any> {
-        return new Observable<string>(observador => {
-          observador.next('1')
-          observador.next('2')
-          observador.next('3')
-          observador.next('4')
-          observador.complete()
-          observador.next('fim')
-          
-        })
+    public pesquisaOfertas(termo: string): Observable<Oferta[]>{
+        return this.http.get(`${this.apiURL}/ofertas?descrcao_oferta=${termo}`)
+        .pipe((resposta: any) => resposta.json())
     }
+
+    
+    
 
     
     
@@ -70,6 +67,16 @@ export class OfertasService {
         })
     }
 
+    public observableOferta(): Observable<any> {
+        return new Observable<string>(observador => {
+          observador.next('1')
+          observador.next('2')
+          observador.next('3')
+          observador.next('4')
+          observador.complete()
+          observador.next('fim')
+        }
+        })
     
       */
 
