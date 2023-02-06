@@ -15,13 +15,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.ofertasService.getOfertas()
-    .subscribe((ofertas: Oferta[]) => {
-      this.oferta = ofertas
-    })
-    
+    .subscribe((ofertas: Oferta[]) => {this.oferta = ofertas})
   }
-  
-
-  
 
 }
