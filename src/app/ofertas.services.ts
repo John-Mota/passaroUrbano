@@ -1,89 +1,55 @@
 import { Injectable } from '@angular/core' 
-import { HttpClient} from '@angular/common/http'
-
+import { HttpClient, HttpResponse} from '@angular/common/http'
 import { Oferta } from './shared/ofertas.model'
-import { Observable, map, retry } from 'rxjs';
+import { Observable, catchError, map, retry, throwError } from 'rxjs';
+
+import {  API_URL } from './app.api';
 
 
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class OfertasService {
 
-    private apiURL = 'http://localhost:3000'
+   
     public ofertas!: Oferta
-  
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient)  {
         
      }
      
     public getOfertas():Observable<any> {
-        return this.http.get(`${this.apiURL}/ofertas?destaque=true`)
+        return this.http.get(`${API_URL}/ofertas?destaque=true`)
+
         
     }
 
     public getOfertasPorCategoria(categoria: string):Observable<any>{
-        return this.http.get(`${this.apiURL}/ofertas?categoria=${categoria}`)
-        //.subscribe((resposta: any) => resposta.json()))
+        return this.http.get(`${API_URL}/ofertas?categoria=${categoria}`)
+        .pipe((resposta: any) => resposta)
     }
 
     public gerOfertaPorId(id: number):Observable<any> {
-        return this.http.get(`${this.apiURL}/ofertas?id=${id}`)  
-    }
-
-    public getComoUsarOfertaPorId(id: number): Observable<any>{
-        return this.http.get(`${this.apiURL}/como-usar?id=${id}`)  
-    }
-
-    public getOndeFicaOfertaPorId(id: number): Observable<any>{
-        return this.http.get(`${this.apiURL}/onde-fica?id=${id}`)  
-    }
-
-    public pesquisaOfertas(termo: string): Observable<any>{
-        return this.http.get(`${this.apiURL}/ofertas?descricao_oferta_like=${termo}`)
-        .pipe(
-            retry(10),
-            map((resposta: any) => {
-              return resposta;
-            })
-          );
+        return this.http.get(`${ API_URL}/ofertas?id=${id}`)  
         
     }
 
-    
-    
-
-    
-    
-
-       
-
-      /*
-      
-    this.ofertaService.observable.subscribe()
-
-    public observable(): Observable<any>{
-        return new Observable<any>(onse => {
-            onse.next(
-                setTimeout(() => {
-                    
-                }, 2000)
-            )
-        })
+    public getComoUsarOfertaPorId(id: number): Observable<any>{
+        return this.http.get(`${ API_URL}/como-usar?id=${id}`)  
+        
     }
 
-    public observableOferta(): Observable<any> {
-        return new Observable<string>(observador => {
-          observador.next('1')
-          observador.next('2')
-          observador.next('3')
-          observador.next('4')
-          observador.complete()
-          observador.next('fim')
-        }
-        })
-    
-      */
+    public getOndeFicaOfertaPorId(id: number): Observable<any>{
+        return this.http.get<HttpResponse<Oferta[]>>(`${ API_URL}/onde-fica?id=${id}`)  
+    }
 
+    public pesquisaOfertas(termo: string): Observable<any>{
+        return this.http.get(`${ API_URL}/ofertas?descricao_oferta_like=${termo}`)
+        .pipe( 
+            map((resposta: any) =>  resposta),
+            retry(10)) 
+    }
+
+//, private response: HttpResponse<any>
 }

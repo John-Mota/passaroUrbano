@@ -11,6 +11,7 @@ import { Oferta } from '../shared/ofertas.model'
 export class HomeComponent implements OnInit {
   
   public oferta!: Oferta[]
+  
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
