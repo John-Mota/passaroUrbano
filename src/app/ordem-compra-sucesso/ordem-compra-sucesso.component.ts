@@ -8,8 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class OrdemCompraSucessoComponent {
 
   @Input() public idPedidoCompra!: number
+  
   constructor() {}
 
   ngOnInit() {}
+
+  
 
 }
