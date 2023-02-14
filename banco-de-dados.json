@@ -187,34 +187,18 @@
   ],
   "pedidos": [
     {
-      "endereco": "monsenhor brub",
-      "numero": "1153",
-      "complemento": "scopa",
+      "endereco": "Rua Elza Leite Albuquerque",
+      "numero": "1054",
+      "complemento": "1054",
+      "formaDePagamento": "dinheiro",
       "id": 1
     },
     {
       "endereco": "Rua Elza Leite Albuquerque",
       "numero": "1054",
       "complemento": "1054",
+      "formaDePagamento": "debito",
       "id": 2
-    },
-    {
-      "endereco": "Rua Elza Leite Albuquerque",
-      "numero": "1054",
-      "complemento": "1054",
-      "id": 3
-    },
-    {
-      "endereco": "Rua Elza Leite Albuquerque",
-      "numero": "1054",
-      "complemento": "1054",
-      "id": 4
-    },
-    {
-      "endereco": "Rua Elza Leite Albuquerque",
-      "numero": "1054",
-      "complemento": "1054",
-      "id": 5
     }
   ]
 }

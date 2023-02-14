@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { OfertasService } from 'src/app/ofertas.services';
-import { Oferta } from 'src/app/shared/ofertas.model';
+import { Oferta } from 'src/app/restaurante/ofertas.model';
 
 @Component({
   selector: 'app-como-usar',

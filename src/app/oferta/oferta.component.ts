@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router'
 import { OfertasService } from '../ofertas.services';
-import { Oferta } from '../shared/ofertas.model';
+import { Oferta } from '../restaurante/ofertas.model';
 import { Observable, Observer, Subscription, interval } from 'rxjs';
 
 
