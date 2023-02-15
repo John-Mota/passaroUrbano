@@ -12,7 +12,7 @@ export class OrdemCompraService {
     constructor(private http: HttpClient) {
         
     }
-    public evetivarCompra(pedido: Pedidos): Observable<number> {
+    public efetivarCompra(pedido: Pedidos): Observable<number> {
         
         //let headers = new HttpHeaders({'Content-type': 'application/json'})
 

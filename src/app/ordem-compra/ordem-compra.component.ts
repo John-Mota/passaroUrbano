@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdemCompraService } from '../ordem-compra.service'
 import { Pedidos } from '../shared/pedidos.model';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CarrinhoService } from '../carrinho.service'
+import { ItemCarrinho } from '../shared/item-carrinho.model';
+
 
 @Component({
   selector: 'app-ordem-compra',
@@ -12,6 +15,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class OrdemCompraComponent implements OnInit {
 
   public idPedidoCompra!: number
+  public itemCarrinho: ItemCarrinho[] = []
 
   public formulario: FormGroup = new FormGroup ({
     'endereco': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(120)]),
@@ -20,10 +24,14 @@ export class OrdemCompraComponent implements OnInit {
     'formaPagamento': new FormControl(null, [Validators.required])
   })
 
-  constructor(private ordemCompraService: OrdemCompraService) { }
+  constructor(
+    private ordemCompraService: OrdemCompraService,
+    public carrinhoService: CarrinhoService
+    ) { }
 
   ngOnInit() {
-    
+    this.itemCarrinho = this.carrinhoService.exibirItens()
+    console.log(this.itemCarrinho)
   }
 
   public confirmarCompra(): void {
@@ -40,11 +48,24 @@ export class OrdemCompraComponent implements OnInit {
         this.formulario.value.complemento,
         this.formulario.value.formaPagamento,
       )
-      this.ordemCompraService.evetivarCompra(pedidos)
+      this.ordemCompraService.efetivarCompra(pedidos)
       .subscribe((idPedido: number) => {
         this.idPedidoCompra = idPedido
         console.log(this.idPedidoCompra)
       })
+    }
+  }
+
+  public adiciona(item: ItemCarrinho): void {
+    this.carrinhoService.adicionarQuantidade(item)
+  }
+
+  public remover(item: ItemCarrinho): void {
+    
+    if(item.quantidade >= 1) {
+      this.carrinhoService.removerQuantidade(item)
+    } else {
+      this.carrinhoService.exibirItens()
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core' 
 
 import { OfertasService } from '../ofertas.services'
-import { Oferta } from '../restaurante/ofertas.model' 
+import { Oferta } from '../shared/ofertas.model' 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core' 
 import { HttpClient, HttpResponse} from '@angular/common/http'
-import { Oferta } from './restaurante/ofertas.model'
+import { Oferta } from './shared/ofertas.model'
 import { Observable, catchError, map, retry, throwError } from 'rxjs';
 
 import {  API_URL } from './app.api';

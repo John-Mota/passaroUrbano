@@ -1,14 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core'; 
+import { RouterModule } from '@angular/router'
+import {  HttpClient, HttpClientModule } from '@angular/common/http'
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { registerLocaleData } from '@angular/common'
 import localePtBr from '@angular/common/locales/pt'
 registerLocaleData(localePtBr); 
-import { RouterModule } from '@angular/router'
-import {  HttpClient, HttpClientModule } from '@angular/common/http'
-//import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { ROUTES } from './app.routes'
+
+import { CarrinhoService } from './carrinho.service';
 
 import { AppComponent } from './app.component';
 import { TopoComponent } from './topo/topo.component';
@@ -47,7 +49,7 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
     ReactiveFormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [HttpClient, {provide: LOCALE_ID, useValue: 'pt-br'}],
+  providers: [CarrinhoService ,HttpClient, {provide: LOCALE_ID, useValue: 'pt-br'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
