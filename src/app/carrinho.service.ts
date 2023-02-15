@@ -44,7 +44,15 @@ export class CarrinhoService {
 
     public removerQuantidade(itemCarrinho: ItemCarrinho): void {
         itemCarrinho.quantidade -= 1
+
+        if ( itemCarrinho.quantidade === 0) {
+            this.itens.splice(this.itens.indexOf(itemCarrinho), 1)
+        }
       
+    }
+
+    public limparCarrinho(): void {
+        this.itens = []
     }
 
    

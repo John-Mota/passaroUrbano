@@ -31,28 +31,38 @@ export class OrdemCompraComponent implements OnInit {
 
   ngOnInit() {
     this.itemCarrinho = this.carrinhoService.exibirItens()
-    console.log(this.itemCarrinho)
+
   }
 
   public confirmarCompra(): void {
     if (this.formulario.status === 'INVALID') {
-      console.log('Formulário está inválido')
       this.formulario.get('endereco')?.markAsUntouched()
       this.formulario.get('numero')?.markAsUntouched()
       this.formulario.get('complemento')?.markAsUntouched()
       this.formulario.get('formaPagamento')?.markAsUntouched()
     } else {
-      let pedidos: Pedidos = new Pedidos(
-        this.formulario.value.endereco,
-        this.formulario.value.numero,
-        this.formulario.value.complemento,
-        this.formulario.value.formaPagamento,
-      )
-      this.ordemCompraService.efetivarCompra(pedidos)
-      .subscribe((idPedido: number) => {
-        this.idPedidoCompra = idPedido
-        console.log(this.idPedidoCompra)
-      })
+
+      if(this.carrinhoService.exibirItens().length) {
+
+        console.log('pedido completo')
+        let pedidos: Pedidos = new Pedidos(
+          this.formulario.value.endereco,
+          this.formulario.value.numero,
+          this.formulario.value.complemento,
+          this.formulario.value.formaPagamento,
+          this.carrinhoService.exibirItens()
+        )
+        this.ordemCompraService.efetivarCompra(pedidos)
+        .subscribe((idPedido: number) => {
+          this.idPedidoCompra = idPedido
+          this.carrinhoService.limparCarrinho()
+        })
+        
+      } else {
+        alert('pedido Incompleto')
+      }
+
+      
     }
   }
 
